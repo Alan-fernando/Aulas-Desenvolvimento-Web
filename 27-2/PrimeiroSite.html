@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil - Scooby-Doo</title>
+</head>
+<body>
+
+    <header>
+        <h1>Scooby-Doo</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Sobre</h2>
+            <img src="scooby.png" alt="Scooby-Doo" width="200">
+
+            <p>
+                Scooby-Doo é um cachorro medroso mas ele é o mais top da turminha.
+            </p>
+        </section>
+
+        <section>
+            <h2>Contato</h2>
+
+            <form id="formulario">
+                <label>Nome:</label><br>
+                <input type="text" id="nome"><br><br>
+
+                <label>Mensagem:</label><br>
+                <textarea id="mensagem"></textarea><br><br>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Comentários</h2>
+
+            <p><strong>Salsicha:</strong> Scooby cade você meu filho!</p>
+            <p><strong>Velma:</strong> Bonitinho mas é cheio de pulga.</p>
+            <p><strong>Fred:</strong> Baita de um cachorro medroso.</p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 - primeira aula de HTML</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("formulario");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const mensagem = document.getElementById("mensagem").value;
+
+            console.log("Nome:", nome);
+            console.log("Mensagem:", mensagem);
+            console.log("Scooby-Doo recebeu a mensagem!");
+        });
+    </script>
+
+</body>
+</html>
