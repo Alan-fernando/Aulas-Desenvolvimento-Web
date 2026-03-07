@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Exemplo de Position</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 2000px; /* só para testar o fixed ao rolar */
+}
+
+/* RELATIVE */
+.caixa-relative{
+    position: relative;
+    background-color: lightblue;
+    width: 300px;
+    height: 150px;
+    top: 40px;
+    left: 40px;
+    padding: 10px;
+}
+
+/* ABSOLUTE */
+.caixa-absolute{
+    position: absolute;
+    background-color: lightcoral;
+    width: 150px;
+    height: 80px;
+    top: 20px;
+    right: 10px;
+    padding: 10px;
+}
+
+/* FIXED */
+.caixa-fixed{
+    position: fixed;
+    background-color: lightgreen;
+    width: 200px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Exemplo de Position</h1>
+
+<div class="caixa-relative">
+    Caixa RELATIVE
+    <div class="caixa-absolute">
+        Caixa ABSOLUTE
+    </div>
+</div>
+
+<div class="caixa-fixed">
+    Caixa FIXED
+</div>
+
+</body>
+</html>
