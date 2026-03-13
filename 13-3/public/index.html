@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil - Scooby-Doo</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        header {
+            background-color: #00a8e8;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            max-width: 600px;
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        img {
+            display: block;
+            margin: auto;
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #00a8e8;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007ea7;
+        }
+
+        #listaComentarios p {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+            color: white;
+        }
+
+        @media (max-width:600px) {
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            section {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Scooby-Doo</h1>
+    </header>
+
+    <main>
+
+        <section>
+
+            <h2>Sobre</h2>
+
+            <img src="scooby.png" alt="Scooby-Doo">
+
+            <p>
+                Scooby-Doo é um cachorro medroso mas ele é o mais top da turminha.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>Contato</h2>
+
+            <form id="formulario">
+
+                <label>Nome:</label>
+                <input type="text" id="nome">
+
+                <label>Mensagem:</label>
+                <textarea id="mensagem"></textarea>
+
+                <button type="submit">Enviar</button>
+
+            </form>
+
+        </section>
+
+        <section>
+
+            <h2>Comentários</h2>
+
+            <div id="listaComentarios">
+
+                <p><strong>Salsicha:</strong> Scooby cade você meu filho!</p>
+                <p><strong>Velma:</strong> Bonitinho mas é cheio de pulga.</p>
+                <p><strong>Fred:</strong> Baita de um cachorro medroso.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 - primeira aula de HTML</p>
+    </footer>
+
+    <script>
+
+        const form = document.getElementById("formulario");
+        const lista = document.getElementById("listaComentarios");
+
+        form.addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const mensagem = document.getElementById("mensagem").value;
+
+            const resposta = await fetch("/comentarios", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    nome: nome,
+                    mensagem: mensagem
+                })
+
+            });
+
+            const comentario = await resposta.json();
+
+            const p = document.createElement("p");
+
+            p.innerHTML = "<strong>" + comentario.nome + ":</strong> " + comentario.mensagem;
+
+            lista.appendChild(p);
+
+            form.reset();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
