@@ -88,37 +88,55 @@
 
     <!-- SCRIPT -->
     <script>
-        const form = document.getElementById("formulario");
-        const lista = document.getElementById("listaComentarios");
+    const form = document.getElementById("formulario");
+    const lista = document.getElementById("listaComentarios");
 
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-            const nome = document.getElementById("nome").value;
-            const mensagem = document.getElementById("mensagem").value;
+        const nome = document.getElementById("nome").value;
+        const mensagem = document.getElementById("mensagem").value;
 
-            const div = document.createElement("div");
-            div.className = "card mb-2";
-
-            div.innerHTML = `
-                <div class="card-body">
-                    <strong>${nome}</strong>
-                    <p>${mensagem}</p>
-                </div>
-            `;
-
-            lista.prepend(div);
-
-            form.reset();
+        fetch('/mensagem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nome,
+                mensagem: mensagem
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Salvo no banco:", data);
+        })
+        .catch(err => {
+            console.error("Erro ao salvar:", err);
         });
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            const atual = html.getAttribute("data-bs-theme");
+        const div = document.createElement("div");
+        div.className = "card mb-2";
 
-            html.setAttribute("data-bs-theme", atual === "light" ? "dark" : "light");
-        }
-    </script>
+        div.innerHTML = `
+            <div class="card-body">
+                <strong>${nome}</strong>
+                <p>${mensagem}</p>
+            </div>
+        `;
+
+        lista.prepend(div);
+
+        form.reset();
+    });
+
+    function toggleTheme() {
+        const html = document.documentElement;
+        const atual = html.getAttribute("data-bs-theme");
+
+        html.setAttribute("data-bs-theme", atual === "light" ? "dark" : "light");
+    }
+</script>
 
 </body>
 
